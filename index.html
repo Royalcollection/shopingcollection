@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Royal Collection — artificial jewellery, bracelets, earrings, pendants and gift hampers.">
+  <title>Royal Collection | Artificial Jewellery & Gifts</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="announcement">✨ All India Delivery • Shipping Included in Product Price • Prepaid UPI Orders</div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Royal Collection home">
+      <img src="logo.png" alt="Royal Collection logo">
+      <div><strong>Royal Collection</strong><span>Jewellery • Gifts • Elegance</span></div>
+    </a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#shop">Shop</a>
+      <a href="#gifts">Gifts</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="cart-button" id="openCart" aria-label="Open cart">🛍️ <span>Cart</span> <b id="cartCount">0</b></button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">ROYAL COLLECTION • JAIPUR</p>
+        <h1>Little pieces that make the moment feel <em>special.</em></h1>
+        <p>Discover artificial jewellery and thoughtful gift picks for birthdays, celebrations, couples and everyday style.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#shop">Shop Collection</a>
+          <a class="btn ghost" href="https://www.instagram.com/royalcollection.inn/" target="_blank" rel="noopener">View Instagram ↗</a>
+        </div>
+        <div class="trust-row"><span>✓ Ready to ship</span><span>✓ All India delivery</span><span>✓ Prepaid UPI</span></div>
+      </div>
+      <div class="hero-card">
+        <img src="logo.png" alt="Royal Collection">
+        <div><span>NEW • GIFTING</span><strong>Make someone smile.</strong></div>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-head">
+        <div><p class="eyebrow">SHOP</p><h2>Find your favourite</h2></div>
+        <div class="search-wrap"><input id="search" type="search" placeholder="Search products..."></div>
+      </div>
+      <div class="category-row" id="categories"></div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state hidden" id="emptyState">No products match your search.</div>
+    </section>
+
+    <section class="gift-banner" id="gifts">
+      <div><p class="eyebrow">GIFT COLLECTION</p><h2>Gifts that say more than words.</h2><p>Explore ready-to-ship picks for birthdays, anniversaries, couples and special days.</p></div>
+      <a class="btn light" href="#shop" data-category-link="Gifts">Explore Gifts</a>
+    </section>
+
+    <section class="section about" id="about">
+      <div><p class="eyebrow">ABOUT ROYAL COLLECTION</p><h2>Made for moments worth remembering.</h2></div>
+      <div><p>Royal Collection brings together trendy artificial jewellery and giftable pieces designed to be easy to choose, easy to order and ready to ship across India.</p><p class="muted">This first version is an MVP. Products, stock, offers and categories can be changed later without rebuilding the whole customer journey.</p></div>
+    </section>
+
+    <section class="contact-strip" id="contact">
+      <div><strong>Need help choosing?</strong><span>Message Royal Collection directly.</span></div>
+      <div class="contact-actions">
+        <a class="btn dark" href="https://wa.me/919351266561" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn outline-dark" href="https://www.instagram.com/royalcollection.inn/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>© <span id="year"></span> Royal Collection</span><span>Prepaid orders • All India delivery</span></footer>
+
+  <!-- Cart drawer -->
+  <div class="overlay hidden" id="overlay"></div>
+  <aside class="drawer" id="cartDrawer" aria-label="Shopping cart">
+    <div class="drawer-head"><h2>Your Cart</h2><button class="icon-btn" id="closeCart">×</button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="total-line"><span>Total</span><strong id="cartTotal">₹0</strong></div>
+      <button class="btn primary full" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+
+  <!-- Product detail modal -->
+  <div class="modal hidden" id="productModal">
+    <div class="modal-card product-detail-card">
+      <div class="drawer-head"><h2>Product Details</h2><button class="icon-btn" id="closeProduct">×</button></div>
+      <div id="productDetail" class="product-detail"></div>
+    </div>
+  </div>
+
+  <!-- Checkout modal -->
+  <div class="modal hidden" id="checkoutModal">
+    <div class="modal-card">
+      <div class="drawer-head"><h2>Checkout</h2><button class="icon-btn" id="closeCheckout">×</button></div>
+      <div id="checkoutStep1">
+        <div class="checkout-progress"><span class="active">1. Address</span><span>2. Payment</span><span>3. Confirmation</span></div>
+        <div class="order-summary" id="checkoutSummary"></div>
+        <p class="checkout-note">Enter the delivery details exactly as you want them printed on the parcel.</p>
+        <form id="checkoutForm" class="form-grid">
+          <label>Full Name<input required name="name" autocomplete="name"></label>
+          <label>Mobile Number<input required name="phone" inputmode="tel" autocomplete="tel"></label>
+          <label class="wide">House / Flat / Street<input required name="address"></label>
+          <label>Area / Locality<input required name="area"></label>
+          <label>City<input required name="city" autocomplete="address-level2"></label>
+          <label>State<input required name="state" autocomplete="address-level1"></label>
+          <label>Pincode<input required name="pincode" inputmode="numeric" autocomplete="postal-code"></label>
+          <button class="btn primary wide" type="submit">Continue to Payment</button>
+        </form>
+      </div>
+      <div id="checkoutStep2" class="hidden">
+        <div class="checkout-progress"><span>1. Address</span><span class="active">2. Payment</span><span>3. Confirmation</span></div>
+        <div class="payment-box">
+          <p class="eyebrow">PAYMENT</p>
+          <h3>Pay <span id="payAmount">₹0</span> by UPI</h3>
+          <div class="qr-wrap">
+            <img src="demo-payment-qr.svg" alt="Demo payment QR code">
+          </div>
+          <p><strong>Open PhonePe → Scan QR → Pay the exact amount.</strong></p>
+          <p class="muted">This is a test QR for the MVP. Before the website goes live, we will replace it with your real PhonePe QR.</p>
+        </div>
+        <form id="paymentForm" class="form-grid">
+          <label class="wide">UPI Transaction / UTR Number<input required name="utr" placeholder="Enter transaction reference"></label>
+          <label class="wide">Payment Screenshot
+            <input required id="paymentScreenshot" name="screenshot" type="file" accept="image/*">
+          </label>
+          <div class="screenshot-preview wide hidden" id="screenshotPreview">
+            <img id="screenshotPreviewImg" alt="Payment screenshot preview">
+          </div>
+          <div class="payment-share wide">
+            <strong>After payment</strong>
+            <span>Save your payment screenshot, then share it with Royal Collection on Instagram for verification.</span>
+            <a class="btn outline-dark" href="https://www.instagram.com/royalcollection.inn/" target="_blank" rel="noopener">Open Instagram ↗</a>
+          </div>
+          <button class="btn primary wide" type="submit">Submit Order</button>
+        </form>
+      </div>
+      <div id="orderSuccess" class="success-box hidden">
+        <div class="success-icon">✓</div>
+        <p class="eyebrow">ORDER RECEIVED</p>
+        <h2>Thank you for shopping with us!</h2>
+        <p>Your order <strong id="successOrderId"></strong> has been recorded.</p>
+        <p class="muted">Payment status: <strong>Under Verification</strong>. We will prepare the product after payment verification.</p>
+        <a class="btn dark" href="https://wa.me/919351266561" target="_blank" rel="noopener">WhatsApp Royal Collection</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
